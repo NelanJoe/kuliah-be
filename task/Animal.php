@@ -6,8 +6,8 @@
  * * Buat Fungsi :
  * * - index : get all data array => foreach
  * * - store : menambahkan data hewan => array_push()
- * * - update : memperbaharui data hewan => array_pad()
- * * - destroy : menghapus data hewan => array_splice()
+ * * - update : memperbaharui data hewan => $array[$index] = $array_value;
+ * * - destroy : menghapus data hewan => array_splice($array, jumlah_dihapus, $index)
  */
 
 class Animal
