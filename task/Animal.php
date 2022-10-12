@@ -83,7 +83,7 @@ $animal->index();
 echo "<br>";
 
 echo "Store - Menambahkan hewan baru <br>";
-$animal->store("");
+$animal->store("Horse");
 $animal->index();
 echo "<br>";
 
