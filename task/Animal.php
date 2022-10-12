@@ -5,9 +5,9 @@
  * * Buat property animals : <array> 
  * * Buat Fungsi :
  * * - index : get all data array => foreach
- * * - store : menambahkan data hewan => array_push()
- * * - update : memperbaharui data hewan => $array[$index] = $array_value;
- * * - destroy : menghapus data hewan => array_splice($array, jumlah_dihapus, $index)
+ * * - store : menambahkan data animal => array_push()
+ * * - update : memperbaharui data animal => $array[$index] = $array_value;
+ * * - destroy : menghapus data animal => array_splice($array, jumlah_dihapus, $index)
  */
 
 class Animal
