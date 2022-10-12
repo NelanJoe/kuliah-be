@@ -2,7 +2,7 @@
 
 /**
  * * Class Animal
- * * Buat property animals : <string> 
+ * * Buat property animals : <array> 
  * * Buat Fungsi :
  * * - index : get all data array => foreach
  * * - store : menambahkan data hewan => array_push()
