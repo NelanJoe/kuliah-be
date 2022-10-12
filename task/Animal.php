@@ -2,7 +2,8 @@
 
 /**
  * * Class Animal
- * * Buat property animals : <array> 
+ * * Buat property animals : [] = <array> 
+ * * Buat constructor animals: [] = <array>
  * * Buat Fungsi :
  * * - index : get all data array => foreach
  * * - store : menambahkan data animal => array_push()
