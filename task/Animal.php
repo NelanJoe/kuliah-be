@@ -28,48 +28,51 @@ class Animal
              * ! Cek array animal jika kosong maka echo "" || result array animal
              * */
             if (!$animal) {
-                return '';
+                echo '';
             } else {
                 echo "{$animal}<br/>";
             }
         }
     }
 
-    public function store(string $data)
+    public function store($data)
     {
         /** 
          * ! Cek kondisi ketika $data bukan <string>
          * */
 
-        if (!is_string($data)) {
-            echo "Must have equals string type <br>";
+        if (!is_string($data) || $data == '') {
+            echo 'Data harus berupa string';
+            echo "<br/>";
         } else {
             array_push($this->animals, $data);
         }
     }
 
-    public function update(int $index, string $data)
+    public function update($index, $data)
     {
         /** 
          * ! Cek kondisi ketika $index bukan <int>
          * ! Cek kondisi ketika $data bukan <string>
          * */
 
-        if (!is_int($index) && !is_string($data)) {
-            echo "Must have equals number or string type <br>";
+        if (!is_int($index) || !is_string($data) || $data == '') {
+            echo 'Data harus berupa string';
+            echo "<br>";
         } else {
             $this->animals[$index] = $data;
         }
     }
 
-    public function destroy(int $index)
+    public function destroy($index)
     {
         /** 
          * ! Cek kondisi ketika $index bukan <int>
          * */
 
         if (!is_int($index)) {
-            echo "Must have equals int type <br>";
+            echo 'Data harus berupa string';
+            echo "<br>";
         } else {
             array_splice($this->animals, 1, $index);
         }
@@ -89,7 +92,7 @@ $animal->index();
 echo "<br>";
 
 echo "Update - Mengupdate hewan <br>";
-$animal->update(0, 'Kucing Anggora');
+$animal->update(0, 'Kucing anggora');
 $animal->index();
 echo "<br>";
 
