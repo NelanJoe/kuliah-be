@@ -39,6 +39,7 @@ class Animal
     {
         /** 
          * ! Cek kondisi ketika $data bukan <string>
+         * ! Cek kondisi ketika $data berupa <string> kosong
          * */
 
         if (!is_string($data) || $data == '') {
@@ -54,10 +55,11 @@ class Animal
         /** 
          * ! Cek kondisi ketika $index bukan <int>
          * ! Cek kondisi ketika $data bukan <string>
+         * ! Cek kondisi ketika $data berupa <string> kosong
          * */
 
         if (!is_int($index) || !is_string($data) || $data == '') {
-            echo 'Data harus berupa string';
+            echo 'Index harus berupa integer dan Data harus berupa string';
             echo "<br>";
         } else {
             $this->animals[$index] = $data;
@@ -71,7 +73,7 @@ class Animal
          * */
 
         if (!is_int($index)) {
-            echo 'Data harus berupa string';
+            echo 'Index harus berupa integer';
             echo "<br>";
         } else {
             array_splice($this->animals, 1, $index);
@@ -87,7 +89,7 @@ $animal->index();
 echo "<br>";
 
 echo "Store - Menambahkan hewan baru <br>";
-$animal->store("Horse");
+$animal->store("Kuda");
 $animal->index();
 echo "<br>";
 
@@ -95,7 +97,6 @@ echo "Update - Mengupdate hewan <br>";
 $animal->update(0, 'Kucing anggora');
 $animal->index();
 echo "<br>";
-
 
 echo "Destroy - Menghapus hewan <br>";
 $animal->destroy(1);
