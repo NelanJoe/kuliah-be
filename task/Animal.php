@@ -11,9 +11,10 @@
  * * - destroy : menghapus data animal => array_splice($array, jumlah_dihapus, $index)
  */
 
+
 class Animal
 {
-    public $animals;
+    public $animals = [];
 
     public function __construct($data)
     {
