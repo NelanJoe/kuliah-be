@@ -12,15 +12,20 @@ class AnimalController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
-        return "Menambahkan data animal";
+        return response()->json([
+            [
+                'nama' => $request->nama
+            ]
+        ]);
+        // return "Menambahkan data animal {$request->nama}";
     }
 
     public function update(Request $request, $id)
     {
-        echo "{$request->nama}";
-        return "Mengubah data animal" . $id;
+
+        return "Mengubah data nama {$request->nama}" . $id;
     }
 
     public function destroy($id)
