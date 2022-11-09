@@ -82,7 +82,7 @@ class StudentController extends Controller
         return response($response, 201);
     }
 
-    // Hapus student
+    // Delete student
     public function destroy($id)
     {
         $student = Student::findOrFail($id);

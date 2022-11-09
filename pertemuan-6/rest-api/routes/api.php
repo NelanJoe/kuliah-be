@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,44 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(["auth:sanctum"])->group(function () {
+    // Get All Student
+    Route::get('/students', [StudentController::class, 'index']);
+    // Menambahkan student
+    Route::post('/students', [StudentController::class, 'store']);
+    // Mendapatkan data student
+    Route::get('/students/{id}', [StudentController::class, 'show']);
+    // Mengubah data sudent
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    // Menghapus data student
+    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
 });
 
-
 /**
- * * Membuat Route get Mahasiswa
- * * GET
- * */
-
-Route::get('/students', [StudentController::class, 'index']);
-
-
-/**
- * * Membuat Route post Mahasiswa
- * * POST 
- * */
-
-Route::post('/students', [StudentController::class, 'store']);
-
-/**
- * * Membuat Route get mahasiswa by id
- * * GET 
- * */
-
-Route::get('/students/{id}', [StudentController::class, 'show']);
-
-
-/**
- * * Membuat update mahasiswa
- * * PUT
- * */
-
-Route::put('/students/{id}', [StudentController::class, 'update']);
-
-/**
- * * Membuat update mahasiswa
- * * DELETE
- * */
-
-Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+ * * Endpoint Register dan Login
+ */
+Route::post("/register", [AuthController::class, "register"]);
+Route::post("/login", [AuthController::class, "login"]);
