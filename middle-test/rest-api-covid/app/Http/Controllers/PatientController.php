@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PatientController extends Controller
 {
     /**
-     * * Refactor method menggunakan helper dengan menggunakan ApiFormatter
+     * * Refactor method menggunakan helper dengan ApiFormatter
      */
 
 
@@ -141,29 +141,33 @@ class PatientController extends Controller
     {
         $patient = Patient::where("status", $status)->get();
         if (!empty($patient)) {
-            if ($status == "positive") {
-                return response()->json([
-                    "code" => 200,
-                    "message" => "Get positive resource",
-                    "total" => count($patient),
-                    "data" => $patient
-                ]);
-            } else if ($status == "recovered") {
-                return response()->json([
-                    "code" => 200,
-                    "message" => "Get recovered resource",
-                    "total" => count($patient),
-                    "data" => $patient
-                ]);
-            } else if ($status == "death") {
-                return response()->json([
-                    "code" => 200,
-                    "message" => "Get dead resource",
-                    "total" => count($patient),
-                    "data" => $patient
-                ]);
-            } else {
-                return ApiFormatter::createApi(404, "Resource not found");
+            switch ($status) {
+                case "positive":
+                    return response()->json([
+                        "code" => 200,
+                        "message" => "Get positive resource",
+                        "total" => count($patient),
+                        "data" => $patient
+                    ]);
+                    break;
+                case "recovered":
+                    return response()->json([
+                        "code" => 200,
+                        "message" => "Get recovered resource",
+                        "total" => count($patient),
+                        "data" => $patient
+                    ]);
+                    break;
+                case "death":
+                    return response()->json([
+                        "code" => 200,
+                        "message" => "Get dead resource",
+                        "total" => count($patient),
+                        "data" => $patient
+                    ]);
+                    break;
+                default:
+                    return ApiFormatter::createApi(404, "Resource not found");
             }
         } else {
             return ApiFormatter::createApi(404, "Resource not found");
