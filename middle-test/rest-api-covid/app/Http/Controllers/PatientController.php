@@ -10,6 +10,7 @@ class PatientController extends Controller
 {
     /**
      * * Refactor method menggunakan helper dengan ApiFormatter
+     * * Yang di dapat dari use App\Helpers\ApiFormatter;
      */
 
 
