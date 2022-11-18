@@ -65,6 +65,11 @@ class PatientController extends Controller
      * */
     public function show($id)
     {
+        /**
+         * * Cek data patient jika ada maka return data patient
+         * * Jika tidak ada maka return data kosong
+         * */
+
         $patient = Patient::findOrFail($id);
 
         if (!empty($patient)) {
@@ -111,6 +116,11 @@ class PatientController extends Controller
      * */
     public function destroy($id)
     {
+        /**
+         * * Cek data patient jika ada maka return data patient
+         * * Jika tidak ada maka return data kosong
+         * */
+
         $patient = Patient::findOrFail($id);
 
         if (!empty($patient)) {
@@ -139,8 +149,18 @@ class PatientController extends Controller
      * */
     public function searchByStatus($status)
     {
+        /**
+         * * Cek data patients jika ada maka return data patients
+         * * Jika tidak ada maka return data kosong
+         * */
+
         $patient = Patient::where("status", $status)->get();
         if (!empty($patient)) {
+            /** 
+             * * Membuat Route Untuk api/search/positive
+             * * Membuat Route Untuk api/search/recovered
+             * * Membuat Route Untuk api/search/dead
+             */
             switch ($status) {
                 case "positive":
                     return response()->json([
@@ -158,7 +178,7 @@ class PatientController extends Controller
                         "data" => $patient
                     ]);
                     break;
-                case "death":
+                case "dead":
                     return response()->json([
                         "code" => 200,
                         "message" => "Get dead resource",
