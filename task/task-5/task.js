@@ -10,12 +10,16 @@
  * @param {string} result - Nama file yang didownload
  */
 const showDownload = async (result) => {
-  const responseData = async () => {
-    console.log("Download selesai");
-    console.log(`Hasil Download: ${result}`);
-  };
+  try {
+    const responseData = async () => {
+      console.log("Download selesai");
+      console.log(`Hasil Download: ${result}`);
+    };
 
-  return await responseData();
+    return await responseData();
+  } catch (error) {
+    return console.error(error);
+  }
 };
 
 /**
