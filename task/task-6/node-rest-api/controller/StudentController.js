@@ -3,36 +3,51 @@ const { students } = require("../data/students");
 // membuat class StudentController
 class StudentConstoller {
   index(req, res) {
-    for (const student of students) {
-      console.log(student);
-    }
-
     const data = {
       message: "Menampilkan semua data students",
-      data: [],
+      data: students,
     };
 
     res.json(data);
   }
 
   store(req, res) {
-    res.json({
-      message: "Menambahkan data student",
-    });
+    const { name } = req.body;
+
+    const newStudents = [...students, name];
+
+    const data = {
+      message: `Menambahkan data student: ${name}`,
+      data: newStudents,
+    };
+
+    res.json(data);
   }
 
   update(req, res) {
     const { id } = req.params;
-    res.json({
-      message: "Mengubah data student",
-    });
+    const { name } = req.body;
+
+    students[id] = name;
+
+    const data = {
+      message: `Mengedit student id ${id}, nama ${name}`,
+      data: students,
+    };
+
+    res.json(data);
   }
 
-  delete() {
+  delete(req, res) {
     const { id } = req.params;
-    res.json({
-      message: "Menghapus data student",
-    });
+
+    students.splice(id, 1);
+
+    const data = {
+      message: `Menghapus student id ${id}`,
+      data: students,
+    };
+    res.json(data);
   }
 }
 
