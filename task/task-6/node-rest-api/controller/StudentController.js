@@ -51,6 +51,7 @@ class StudentConstoller {
   }
 }
 
+// Membuat object StudentController
 const object = new StudentConstoller();
 
 module.exports = object;
