@@ -2,7 +2,7 @@
 /*
     * import Student Controller
 */ 
-const StudentController = require("../controller/StudentController");
+const StudentController = require("../controllers/StudentController");
 
 // import exprees & router
 const express = require("express");
