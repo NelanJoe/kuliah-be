@@ -1,7 +1,7 @@
 const { students } = require("../data/students");
 
 // membuat class StudentController
-class StudentConstoller {
+class StudentController {
   index(req, res) {
     const data = {
       message: "Menampilkan semua data students",
@@ -52,6 +52,6 @@ class StudentConstoller {
 }
 
 // Membuat object StudentController
-const object = new StudentConstoller();
+const object = new StudentController();
 
 module.exports = object;
