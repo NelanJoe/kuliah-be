@@ -5,11 +5,7 @@ class StudentController {
   index(req, res) {
     const data = {
       message: "Menampilkan semua data students",
-      data: students.map((student) => {
-        return {
-          student,
-        };
-      }),
+      data: students,
     };
 
     res.json(data);
