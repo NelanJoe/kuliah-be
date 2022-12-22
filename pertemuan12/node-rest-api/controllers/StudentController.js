@@ -36,16 +36,16 @@ class StudentController {
   }
 
   async update(req, res) {
-
     const { id } = req.params;
     const { nama, nim, email, jurusan } = req.body;
 
-    await Student.update({ id, nama, nim, email, jurusan });
+    await Student.update({ nama, nim, email, jurusan, });
 
-    const students = await Student.all();
+    const student = { id: id, ...req.body };
+
     res.json({
       message: `Update Student ${id} : ${nama}`,
-      data: students,
+      data: [student],
     });
   }
 

@@ -22,9 +22,12 @@ class Student {
   }
 
   static store(data) {
+    // Destructing object in parameter data
+    const { nama, nim, email, jurusan } = data;
+    
     return new Promise((resolve, reject) => {
-      const sqlQuery = `INSERT INTO students (nama, nim, email, jurusan) VALUES ('${data.nama}', '${data.nim}', '${data.email}', '${data.jurusan}')`;
-      
+      const sqlQuery = `INSERT INTO students (nama, nim, email, jurusan) VALUES ('${nama}', '${nim}', '${email}', '${jurusan}')`;
+
       db.query(sqlQuery, (err, results) => {
         resolve(results);
       });
@@ -32,8 +35,10 @@ class Student {
   }
 
   static update(data) {
+    const { nama, nim, email, jurusan } = data;
+
     return new Promise((resolve, reject) => {
-      const sqlQuery = `UPDATE students SET nama = '${data.nama}', nim = '${data.nim}', email = '${data.email}', jurusan = '${data.jurusan}' WHERE id = ${data.id}`;
+      const sqlQuery = `UPDATE students SET nama = '${nama}', nim = '${nim}', email = '${email}', jurusan = '${jurusan}' WHERE id = ${data.id}`;
 
       db.query(sqlQuery, (err, results) => {
         resolve(results);
