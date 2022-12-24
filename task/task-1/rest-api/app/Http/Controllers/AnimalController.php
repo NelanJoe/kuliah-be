@@ -48,8 +48,7 @@ class AnimalController extends Controller
 
     public function destroy($id)
     {
-        $animal = $this->animals[$id];
-        unset($animal, $id);
+        unset($this->animals[$id]);
         echo "{$this->index()}";
     }
 }
