@@ -21,9 +21,9 @@ class Student {
     });
   }
 
-  static store(data) {
+  static store({nama, nim, jurusan, email, createdAt, updatedAt}) {
     return new Promise((resolve, reject) => {
-      const sqlQuery = `INSERT INTO students (nama, nim, email, jurusan) VALUES ('${data.nama}', '${data.nim}', '${data.email}', '${data.jurusan}')`;
+      const sqlQuery = `INSERT INTO students (nama, nim, email, jurusan, created_at, updated_at) VALUES ('${nama}', '${nim}', '${email}', '${jurusan}', '${createdAt}', '${updatedAt}')`;
       
       db.query(sqlQuery, (err, results) => {
         resolve(results);

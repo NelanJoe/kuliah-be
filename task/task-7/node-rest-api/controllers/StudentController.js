@@ -24,8 +24,10 @@ class StudentController {
 
   async store(req, res) {
     const { nama, nim, email, jurusan } = req.body;
+    const updatedAt = new Date();
+    const createdAt = new Date();
 
-    await Student.store({ nama, nim, email, jurusan });
+    await Student.store({ nama, nim, email, jurusan, createdAt, updatedAt });
 
     const students = await Student.all();
 
@@ -36,7 +38,6 @@ class StudentController {
   }
 
   async update(req, res) {
-
     const { id } = req.params;
     const { nama, nim, email, jurusan } = req.body;
 
