@@ -6,7 +6,7 @@ const {
   error,
   successDelete,
   errorDelete,
-} = require("../helpers/ApiFormatter");
+} = require("../helpers/ApiHelpers");
 
 /**
  * Import Student Model
