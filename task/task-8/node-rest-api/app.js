@@ -15,7 +15,7 @@ const PORT = process.env.APP_PORT || 8000;
 // Routing home express
 app.get("/", (req, res) => {
   res.json({
-    message: "Hello, World👋",
+    message: "Hello, Express👋",
   });
 });
 

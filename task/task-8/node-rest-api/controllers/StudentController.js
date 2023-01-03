@@ -1,66 +1,101 @@
-// const { students } = require("../data/students");
+/**
+ * * Import Api Formatter
+ * */
+const {
+  success,
+  error,
+  successDelete,
+  errorDelete,
+} = require("../helpers/ApiFormatter");
+
+/**
+ * Import Student Model
+ * */
 const Student = require("../models/Student");
 
-// membuat class StudentController
+/**
+ * Membuat class StudentController
+ * */
 class StudentController {
+  /**
+   * * Membuat function index
+   */
   async index(req, res) {
     const students = await Student.all();
 
-    res.json({
-      message: "Get all students",
-      data: students,
-    });
+    /**
+     * * Jika data ditemukan maka akan mengembalikan response dengan format success
+     * * Jika tidak maka akan mengembalikan response dengan format error
+     */
+    if (students) {
+      return res.status(200).json(success("Get all students", students, 200));
+    }
+
+    return res.status(404).json(error("Not found data", 404));
   }
 
+  /**
+   * * Membuat function show
+   */
   async show(req, res) {
     const { id } = req.params;
-    const student = await Student.findId(id);
+    const student = await Student.find(id);
 
-    res.json({
-      message: `Get Student ${id}`,
-      data: student,
-    });
+    return res
+      .status(200)
+      .json(success(`Get student with id ${id}`, student, 200));
   }
 
+  /**
+   * * Membuat function store
+   */
   async store(req, res) {
-    const { nama, nim, email, jurusan } = req.body;
-    const updatedAt = new Date();
-    const createdAt = new Date();
+    // Destructuring Object req.body
+    const { nama, email, nim, jurusan } = req.body;
 
-    await Student.store({ nama, nim, email, jurusan, createdAt, updatedAt });
+    if (!nama || !email || !nim || !jurusan) {
+      return res.status(400).json(error("Bad Request", 400));
+    }
 
-    const students = await Student.all();
+    const student = await Student.create({ ...req.body });
 
-    res.json({
-      message: `Add new student ${nama}`,
-      data: students,
-    });
+    return res.status(202).json(success("Create new student", student, 202));
   }
 
+  /**
+   * * Membuat function update
+   */
   async update(req, res) {
     const { id } = req.params;
-    const { nama, nim, email, jurusan } = req.body;
 
-    await Student.update({ id, nama, nim, email, jurusan });
+    const student = await Student.find(id);
 
-    const students = await Student.all();
-    res.json({
-      message: `Update Student ${id} : ${nama}`,
-      data: students,
-    });
+    if (student) {
+      const studentUpdated = await Student.update(id, req.body);
+      res
+        .status(202)
+        .json(success(`Update student with id ${id}`, studentUpdated, 202));
+    } else {
+      res.status(404).json(error(`Not found data with id ${id}`, 404));
+    }
   }
 
+  /**
+   * * Membuat function delete
+   */
   async delete(req, res) {
     const { id } = req.params;
 
-    await Student.delete(id);
+    const student = Student.find(id);
 
-    res.json({
-      message: `Delete Student with ${id}`,
-    });
+    if (student) {
+      await Student.delete(id);
+      res.json(successDelete(`Delete student with id ${id}`, 202));
+    } else {
+      res.json(errorDelete(`Not found data with id ${id}`, 404));
+    }
   }
 }
 
-const object = new StudentController();
-
-module.exports = object;
+// Export class StudentController
+module.exports = new StudentController();
