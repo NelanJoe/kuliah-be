@@ -10,30 +10,24 @@ const { DataTypes } = require("sequelize");
 
 /**
  * * Make Model Patients
- * */ 
-const Patients = db.define("patients", {
+ * */
+const Users = db.define("users", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
+  username: {
     type: DataTypes.STRING,
+    required: true,
   },
-  phone: {
+  email: {
     type: DataTypes.STRING,
+    required: true,
   },
-  address: {
+  password: {
     type: DataTypes.STRING,
-  },
-  status: {
-    type: DataTypes.STRING,
-  },
-  in_date_at: {
-    type: DataTypes.DATE,
-  },
-  out_date_at: {
-    type: DataTypes.DATE,
+    required: true,
   },
   createdAt: {
     type: DataTypes.DATE,
@@ -45,5 +39,5 @@ const Patients = db.define("patients", {
   },
 });
 
-// Export Model Patients 
-module.exports = Patients;
+// Export Model Users
+module.exports = Users;

@@ -1,7 +1,25 @@
+/**
+ * * Import module express, cors, router
+ * */
 const express = require("express");
 const cors = require("cors");
 const router = require("./routes/api");
+const AuthControllers = require("./controllers/AuthControllers");
 
+/**
+ * * Import protect
+ * * Import register validation
+ * * Import login validation
+ * */
+const {
+  protect,
+  registerValidation,
+  loginValidation,
+} = require("./middlewares/AuthMiddlewares");
+
+/**
+ * * Definisikan express
+ * */
 const app = express();
 /**
  * * Definisikan PORT aplikasi
@@ -28,9 +46,16 @@ app.get("/", (req, res) => {
 });
 
 /**
+ * * Add Route Register & Login
+ * * Add registerValidation & loginValidation from Auth Middleware
+ * */
+app.post("/signup", registerValidation, AuthControllers.signup);
+app.post("/login", loginValidation, AuthControllers.login);
+
+/**
  * * Import router
  */
-app.use("/api", router);
+app.use("/api", protect, router);
 
 /**
  * * Listening server
