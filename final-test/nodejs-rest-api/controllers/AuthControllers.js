@@ -13,9 +13,19 @@ const {
 } = require("../helpers/AuthHelper");
 
 /**
- * * Import success, error & success login from Api Formatter
+ * * Import format api from Api Formatter
  * */
-const { success, error, successLogin } = require("../helpers/ApiFormatter");
+const {
+  error,
+  successLogin,
+  successRegister,
+  validation,
+} = require("../helpers/ApiFormatter");
+
+/**
+ * * Import validation result from express validator
+ * */
+const { validationResult } = require("express-validator");
 
 /**
  * * Create Class Auth Controller
@@ -27,6 +37,16 @@ class AuthContollers {
      * * Destucting name, email & password from req.body
      * */
     const { name, email, password } = req.body;
+
+    /**
+     *  * Define validation result from express validator
+     * */
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.status(400).json(validation(errors.array()));
+      return;
+    }
 
     /**
      * * Try Catch for create new user
@@ -45,7 +65,7 @@ class AuthContollers {
       });
 
       // * Response success
-      res.status(200).json(success(201, "Succesfully created new user", user));
+      res.status(200).json(successRegister(200, "Succesfully register"));
     } catch (error) {
       // * Response error
       console.error(error);
@@ -59,6 +79,16 @@ class AuthContollers {
      * * Destucting email & password from req.body
      * */
     const { email, password } = req.body;
+
+    /**
+     *  * Define validation result from express validator
+     * */
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.status(400).json(validation(errors.array()));
+      return;
+    }
 
     // * Find user where email :=> email
     const user = await Users.findOne({

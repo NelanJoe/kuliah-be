@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { error } = require("../helpers/ApiFormatter");
 const { check } = require("express-validator");
+const Users = require("../models/Users");
 
 require("dotenv").config();
 
@@ -8,9 +9,19 @@ require("dotenv").config();
  * Register validation
  */
 exports.registerValidation = [
-  check("name", "Name is required").notEmpty(),
-  check("email", "Email is required").notEmpty(),
-  check("password", "Password is required").notEmpty(),
+  check("username", "Username is required").notEmpty().isLength({ min: 3, max: 12 }),
+  check("email", "Email is required")
+    .notEmpty()
+    .custom(async (value) => {
+      return await Users.findOne({ where: { email: value } }).then((user) => {
+        if (user) {
+          return Promise.reject("E-mail already in use");
+        }
+      });
+    }),
+  check("password", "Password is required")
+    .notEmpty()
+    .isLength({ min: 6, max: 12 }),
 ];
 
 /**

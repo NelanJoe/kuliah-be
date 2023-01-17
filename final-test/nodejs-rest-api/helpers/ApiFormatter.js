@@ -40,10 +40,18 @@ exports.validation = (error) => {
   };
 };
 
-
+/**
+ * * Make function & exports for handle response success register
+ * */
+exports.successRegister = (code, message) => {
+  return {
+    code: code,
+    message: message,
+  };
+};
 
 /**
- * * Make function & exports for handle response success
+ * * Make function & exports for handle response success login
  * */
 exports.successLogin = (code, message, token) => {
   return {

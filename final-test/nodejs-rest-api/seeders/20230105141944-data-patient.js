@@ -25,7 +25,7 @@ module.exports = {
         name: "Joko Susilo",
         phone: "08717641212",
         address: "Bogor, Indonesia",
-        status: "negative",
+        status: "dead",
         in_date_at: "2023-01-12",
         out_date_at: "2023-02-13",
       },
