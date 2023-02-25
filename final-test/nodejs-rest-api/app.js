@@ -4,18 +4,13 @@
 const express = require("express");
 const cors = require("cors");
 const router = require("./routes/api");
-const AuthControllers = require("./controllers/AuthControllers");
+
+const authRouter = require("./routes/auth.route");
 
 /**
  * * Import protect
- * * Import register validation
- * * Import login validation
  * */
-const {
-  protect,
-  registerValidation,
-  loginValidation,
-} = require("./middlewares/AuthMiddlewares");
+const { protect } = require("./middlewares/AuthMiddlewares");
 
 /**
  * * Definisikan express
@@ -47,10 +42,8 @@ app.get("/", (req, res) => {
 
 /**
  * * Add Route Register & Login
- * * Add registerValidation & loginValidation from Auth Middleware
  * */
-app.post("/signup", registerValidation, AuthControllers.signup);
-app.post("/login", loginValidation, AuthControllers.login);
+app.use(authRouter);
 
 /**
  * * Import router
